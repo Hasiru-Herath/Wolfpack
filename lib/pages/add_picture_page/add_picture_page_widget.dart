@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -7,7 +10,8 @@ import 'add_picture_page_model.dart';
 export 'add_picture_page_model.dart';
 
 class AddPicturePageWidget extends StatefulWidget {
-  const AddPicturePageWidget({super.key});
+  final String id;
+  const AddPicturePageWidget({super.key, required this.id});
 
   @override
   State<AddPicturePageWidget> createState() => _AddPicturePageWidgetState();
@@ -15,8 +19,19 @@ class AddPicturePageWidget extends StatefulWidget {
 
 class _AddPicturePageWidgetState extends State<AddPicturePageWidget> {
   late AddPicturePageModel _model;
-
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  File? _selectedImage;
+
+  Future<void> _pickImage() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      setState(() {
+        _selectedImage = File(image.path);
+      });
+    }
+  }
 
   @override
   void initState() {
@@ -81,6 +96,31 @@ class _AddPicturePageWidgetState extends State<AddPicturePageWidget> {
                           'No long shots – we want to see you \nup close, not in the next zip code.'),
                       _buildInfoRow(Icons.adb,
                           'No object photos – yes, your bike \nand kitten are cute, but we’re here for you.'),
+
+                      const SizedBox(height: 20),
+                      Center(
+                        child: GestureDetector(
+                          onTap: _pickImage,
+                          child: Container(
+                            width: 150,
+                            height: 150,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: _selectedImage != null
+                                ? ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Image.file(
+                                _selectedImage!,
+                                fit: BoxFit.cover,
+                              ),
+                            )
+                                : const Icon(Icons.camera_alt, size: 50, color: Colors.black),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
                     ],
                   ),
                 ),

@@ -39,7 +39,7 @@ class _BirtdayPageWidgetState extends State<BirtdayPageWidget> {
               (_){
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => AgeConfirmationPageWidget()),
+              MaterialPageRoute(builder: (context) => AgeConfirmationPageWidget(id: uid,)),
             );
           }
       );

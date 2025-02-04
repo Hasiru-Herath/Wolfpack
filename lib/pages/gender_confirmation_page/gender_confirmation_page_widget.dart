@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:wolf_pack/index.dart';
 
 import '/flutter_flow/flutter_flow_drop_down.dart';
@@ -10,7 +12,8 @@ import 'gender_confirmation_page_model.dart';
 export 'gender_confirmation_page_model.dart';
 
 class GenderConfirmationPageWidget extends StatefulWidget {
-  const GenderConfirmationPageWidget({super.key});
+  final String id;
+  const GenderConfirmationPageWidget({super.key,required  this.id});
 
   @override
   State<GenderConfirmationPageWidget> createState() =>
@@ -22,7 +25,31 @@ class _GenderConfirmationPageWidgetState
   late GenderConfirmationPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final DatabaseReference _database = FirebaseDatabase.instance.ref();
 
+  Future<void> saveUserGender() async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      String uid = widget.id;
+      String? gender = _model.dropDownValue ;
+
+      print(widget.id+" "+gender!);
+
+      await _database.child("users").child(uid).update({
+        "gender": gender,
+      }).then(
+              (_){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => GenderConfirmationPageCopyWidget(id:widget.id)),
+            );
+          }
+      );
+
+
+    }
+  }
   @override
   void initState() {
     super.initState();
@@ -151,7 +178,7 @@ class _GenderConfirmationPageWidgetState
                             child: FFButtonWidget(
                               onPressed: () {
                                 print('Button pressed ...');
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>GenderConfirmationPageCopyWidget()));
+                                saveUserGender();
                               },
                               text: 'Next',
                               options: FFButtonOptions(
