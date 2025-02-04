@@ -52,7 +52,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Verification_page',
           path: '/verificationPage',
-          builder: (context, params) => const VerificationPageWidget(),
+          builder: (context, params) => const VerificationPageWidget(mobileNumber: '', verificationId: '',),
         ),
         FFRoute(
           name: 'Name_page',

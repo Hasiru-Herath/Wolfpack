@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/services.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:wolf_pack/index.dart';
 
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -8,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'enter_mobile_page_model.dart';
 export 'enter_mobile_page_model.dart';
 
+
 class EnterMobilePageWidget extends StatefulWidget {
   const EnterMobilePageWidget({super.key});
 
@@ -15,10 +19,15 @@ class EnterMobilePageWidget extends StatefulWidget {
   State<EnterMobilePageWidget> createState() => _EnterMobilePageWidgetState();
 }
 
+
 class _EnterMobilePageWidgetState extends State<EnterMobilePageWidget> {
   late EnterMobilePageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseDatabase _database = FirebaseDatabase.instance;
+
+  PhoneNumber? _phoneNumber;
 
   @override
   void initState() {
@@ -113,49 +122,36 @@ class _EnterMobilePageWidgetState extends State<EnterMobilePageWidget> {
                                   0.0, 25.0, 0.0, 0.0),
                               child: SizedBox(
                                 width: MediaQuery.sizeOf(context).width * 0.7,
-                                child: TextFormField(
-                                  controller: _model.textController,
-                                  focusNode: _model.textFieldFocusNode,
-                                  autofocus: false,
-                                  obscureText: false,
-                                  keyboardType: TextInputType.phone, // Numeric keyboard
-                                  maxLength: 10, // Adjust based on country
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly, // Allow only numbers
-                                  ],
-                                  decoration: InputDecoration(
-                                    isDense: true,
-                                    hintText: 'Mobile Number', // Add a meaningful label
-                                    prefixIcon: Icon(Icons.phone, color: Colors.grey), // Phone icon
-                                    // enabledBorder: OutlineInputBorder(
-                                    //   borderSide: const BorderSide(
-                                    //     color: Color(0x63000000),
-                                    //     width: 1.0,
-                                    //   ),
-                                    //   borderRadius: BorderRadius.circular(8.0),
-                                    // ),
-                                    // focusedBorder: OutlineInputBorder(
-                                    //   borderSide: BorderSide(
-                                    //     color: Colors.blue, // Highlight when focused
-                                    //     width: 2.0,
-                                    //   ),
-                                    //   borderRadius: BorderRadius.circular(8.0),
-                                    // ),
-                                    filled: true,
-                                    fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                                child: InternationalPhoneNumberInput(
+                                  onInputChanged: (PhoneNumber number) {
+                                    _phoneNumber = number;
+                                  },
+                                  onInputValidated: (bool isValid) {
+                                    print('Valid number: $isValid');
+                                  },
+                                  selectorConfig: SelectorConfig(
+                                    selectorType: PhoneInputSelectorType.BOTTOM_SHEET, // Dropdown or dialog
                                   ),
-                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Inter',
-                                    letterSpacing: 0.0,
+                                  ignoreBlank: false,
+                                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                                  textStyle: TextStyle(fontSize: 16),
+                                  selectorTextStyle: TextStyle(color: Colors.black),
+                                  initialValue: _phoneNumber,
+                                  textFieldController: _model.textController,
+                                  formatInput: true,
+                                  keyboardType: TextInputType.phone,
+                                  inputDecoration: InputDecoration(
+                                    hintText: 'Mobile Number',
+                                    // border: OutlineInputBorder(),
                                   ),
-                                  cursorColor: FlutterFlowTheme.of(context).primaryText,
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter your mobile number';
-                                    } else if (value.length < 10) {
-                                      return 'Enter a valid mobile number';
                                     }
                                     return null;
+                                  },
+                                  onSaved: (PhoneNumber number) {
+                                    print('Saved number: $number');
                                   },
                                 ),
 
@@ -168,9 +164,37 @@ class _EnterMobilePageWidgetState extends State<EnterMobilePageWidget> {
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 25.0, 0.0, 0.0),
                               child: FFButtonWidget(
-                                onPressed: () {
-                                  print('Button pressed ...');
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => VerificationPageWidget()));
+                                onPressed: () async {
+                                  String mobileNumber = _model.textController.text.trim();
+                                  print(mobileNumber.length.toString());
+                                  if (mobileNumber.isEmpty || mobileNumber.length > 12) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text('Please enter a valid mobile number')),
+                                    );
+                                    return;
+                                  }
+
+                                  // Send OTP
+                                  await _auth.verifyPhoneNumber(
+                                    phoneNumber: '+94$mobileNumber',  // Change country code accordingly
+                                    verificationCompleted: (PhoneAuthCredential credential) async {
+                                      await _auth.signInWithCredential(credential);
+                                    },
+                                    verificationFailed: (FirebaseAuthException e) {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(content: Text('Verification failed: ${e.message}')),
+                                      );
+                                    },
+                                    codeSent: (String verificationId, int? resendToken) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => VerificationPageWidget(verificationId: verificationId, mobileNumber: mobileNumber),
+                                        ),
+                                      );
+                                    },
+                                    codeAutoRetrievalTimeout: (String verificationId) {},
+                                  );
                                 },
                                 text: 'Send the Code',
                                 options: FFButtonOptions(
