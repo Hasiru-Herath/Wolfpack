@@ -169,7 +169,7 @@ class _AgeConfirmationPageWidgetState extends State<AgeConfirmationPageWidget> {
                               0.0, 10.0, 0.0, 0.0),
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>BirtdayPageWidget()));
+                              // Navigator.push(context, MaterialPageRoute(builder: (context)=>BirtdayPageWidget()));
                             },
                             child: Text(
                               'Edit my Date of Birth',

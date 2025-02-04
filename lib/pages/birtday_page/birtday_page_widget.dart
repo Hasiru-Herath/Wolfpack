@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:wolf_pack/index.dart';
 
 import '/flutter_flow/flutter_flow_calendar.dart';
@@ -9,7 +11,8 @@ import 'birtday_page_model.dart';
 export 'birtday_page_model.dart';
 
 class BirtdayPageWidget extends StatefulWidget {
-  const BirtdayPageWidget({super.key});
+  final String id;
+  const BirtdayPageWidget({Key? key, this.id = "DefaultID"}) : super(key: key);
 
   @override
   State<BirtdayPageWidget> createState() => _BirtdayPageWidgetState();
@@ -19,7 +22,31 @@ class _BirtdayPageWidgetState extends State<BirtdayPageWidget> {
   late BirtdayPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final DatabaseReference _database = FirebaseDatabase.instance.ref();
 
+  Future<void> saveUserDOB() async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      String uid = widget.id;
+      String dob = _model.textController .text.trim();
+
+      print(widget.id+""+dob);
+
+      await _database.child("users").child(uid).update({
+        "dob": dob,
+      }).then(
+              (_){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AgeConfirmationPageWidget()),
+            );
+          }
+      );
+
+
+    }
+  }
   @override
   void initState() {
     super.initState();
@@ -251,7 +278,7 @@ class _BirtdayPageWidgetState extends State<BirtdayPageWidget> {
                             child: FFButtonWidget(
                               onPressed: () {
                                 print('Button pressed ...');
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>AgeConfirmationPageWidget()));
+                                saveUserDOB();
                               },
                               text: 'Next',
                               options: FFButtonOptions(

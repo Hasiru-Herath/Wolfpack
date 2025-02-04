@@ -62,12 +62,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Email_page',
           path: '/emailPage',
-          builder: (context, params) => const EmailPageWidget(),
+          builder: (context, params) => const EmailPageWidget(id: '',),
         ),
         FFRoute(
           name: 'Birtday_page',
           path: '/birtdayPage',
-          builder: (context, params) => const BirtdayPageWidget(),
+          builder: (context, params) => const BirtdayPageWidget(id: "",),
         ),
         FFRoute(
           name: 'Age_confirmation_page',

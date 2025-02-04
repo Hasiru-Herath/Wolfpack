@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:wolf_pack/index.dart';
 
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -8,7 +10,8 @@ import 'email_page_model.dart';
 export 'email_page_model.dart';
 
 class EmailPageWidget extends StatefulWidget {
-  const EmailPageWidget({super.key});
+  final String  id;
+  const EmailPageWidget({Key? key, this.id = "DefaultID"}) : super(key: key);
 
   @override
   State<EmailPageWidget> createState() => _EmailPageWidgetState();
@@ -18,7 +21,32 @@ class _EmailPageWidgetState extends State<EmailPageWidget> {
   late EmailPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final DatabaseReference _database = FirebaseDatabase.instance.ref();
 
+  Future<void> saveUserEmail() async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      String uid = widget.id;
+      String email = _model.textController .text.trim();
+
+      print(widget.id+""+email);
+
+      await _database.child("users").child(uid).update({
+        "email": email,
+      }).then(
+          (_){
+            print(uid);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => BirtdayPageWidget(id: uid,)),
+            );
+          }
+      );
+
+
+    }
+  }
   @override
   void initState() {
     super.initState();
@@ -188,7 +216,7 @@ class _EmailPageWidgetState extends State<EmailPageWidget> {
                             child: FFButtonWidget(
                               onPressed: () {
                                 print('Button pressed ...');
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>BirtdayPageWidget()));
+                                saveUserEmail();
                               },
                               text: 'Done!',
                               options: FFButtonOptions(

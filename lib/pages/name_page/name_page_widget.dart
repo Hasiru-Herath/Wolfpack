@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:wolf_pack/index.dart';
 
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -14,10 +16,35 @@ class NamePageWidget extends StatefulWidget {
   State<NamePageWidget> createState() => _NamePageWidgetState();
 }
 
+
+
 class _NamePageWidgetState extends State<NamePageWidget> {
   late NamePageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final FocusNode _focusNode = FocusNode();
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final DatabaseReference _database = FirebaseDatabase.instance.ref();
+
+  Future<void> saveUserName() async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      String uid = user.uid;
+      String name = _model.textController .text.trim();
+
+      await _database.child("users").child(uid).set({
+        "name": name,
+        "email": '',
+        "dob": '',
+      });
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => EmailPageWidget(id: uid,)),
+      );
+    }
+  }
 
   @override
   void initState() {
@@ -34,6 +61,7 @@ class _NamePageWidgetState extends State<NamePageWidget> {
 
     super.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -188,7 +216,7 @@ class _NamePageWidgetState extends State<NamePageWidget> {
                             child: FFButtonWidget(
                               onPressed: () {
                                 print('Button pressed ...');
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>EmailPageWidget()));
+                                saveUserName();
                               },
                               text: 'Next Up',
                               options: FFButtonOptions(
