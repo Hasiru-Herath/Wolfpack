@@ -1,4 +1,5 @@
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:wolf_pack/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -147,6 +148,12 @@ class _VerificationPageWidgetState extends State<VerificationPageWidget> {
                             child: FFButtonWidget(
                               onPressed: () {
                                 print('Button pressed ...');
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => NamePageWidget(),
+                                  ),
+                                );
                               },
                               text: 'Verify Me',
                               options: FFButtonOptions(
