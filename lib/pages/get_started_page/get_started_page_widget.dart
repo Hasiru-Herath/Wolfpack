@@ -2,25 +2,25 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'home_page_model.dart';
-export 'home_page_model.dart';
+import 'get_started_page_model.dart';
+export 'get_started_page_model.dart';
 
-class HomePageWidget extends StatefulWidget {
-  const HomePageWidget({super.key});
+class GetStartedPageWidget extends StatefulWidget {
+  const GetStartedPageWidget({super.key});
 
   @override
-  State<HomePageWidget> createState() => _HomePageWidgetState();
+  State<GetStartedPageWidget> createState() => _GetStartedPageWidgetState();
 }
 
-class _HomePageWidgetState extends State<HomePageWidget> {
-  late HomePageModel _model;
+class _GetStartedPageWidgetState extends State<GetStartedPageWidget> {
+  late GetStartedPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => HomePageModel());
+    _model = createModel(context, () => GetStartedPageModel());
   }
 
   @override
@@ -107,7 +107,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 letterSpacing: 0.0,
                                 fontWeight: FontWeight.w300,
                               ),
-                      elevation: 5.0,
+                      elevation: 1.0,
                     ),
                   ),
                 ),
@@ -138,7 +138,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             focusColor: Colors.transparent,
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
-                            onTap: () async {},
+                            onTap: () async {
+                              context.pushNamed('Enter_mobile_page');
+                            },
                             child: Text(
                               'Login here',
                               style: FlutterFlowTheme.of(context)

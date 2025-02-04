@@ -2,25 +2,25 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'enter_mobile_model.dart';
-export 'enter_mobile_model.dart';
+import 'enter_mobile_page_model.dart';
+export 'enter_mobile_page_model.dart';
 
-class EnterMobileWidget extends StatefulWidget {
-  const EnterMobileWidget({super.key});
+class EnterMobilePageWidget extends StatefulWidget {
+  const EnterMobilePageWidget({super.key});
 
   @override
-  State<EnterMobileWidget> createState() => _EnterMobileWidgetState();
+  State<EnterMobilePageWidget> createState() => _EnterMobilePageWidgetState();
 }
 
-class _EnterMobileWidgetState extends State<EnterMobileWidget> {
-  late EnterMobileModel _model;
+class _EnterMobilePageWidgetState extends State<EnterMobilePageWidget> {
+  late EnterMobilePageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => EnterMobileModel());
+    _model = createModel(context, () => EnterMobilePageModel());
 
     _model.textController ??=
         TextEditingController(text: 'Enter mobile number');
@@ -209,7 +209,7 @@ class _EnterMobileWidgetState extends State<EnterMobileWidget> {
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w300,
                                         ),
-                                    elevation: 5.0,
+                                    elevation: 1.0,
                                   ),
                                 ),
                               ),

@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'enter_mobile_widget.dart' show EnterMobileWidget;
+import 'enter_mobile_page_widget.dart' show EnterMobilePageWidget;
 import 'package:flutter/material.dart';
 
-class EnterMobileModel extends FlutterFlowModel<EnterMobileWidget> {
+class EnterMobilePageModel extends FlutterFlowModel<EnterMobilePageWidget> {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for TextField widget.

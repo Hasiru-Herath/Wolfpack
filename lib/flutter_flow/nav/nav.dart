@@ -32,22 +32,62 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
-      errorBuilder: (context, state) => const HomePageWidget(),
+      errorBuilder: (context, state) => const GetStartedPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => const HomePageWidget(),
+          builder: (context, _) => const GetStartedPageWidget(),
         ),
         FFRoute(
-          name: 'HomePage',
-          path: '/homePage',
-          builder: (context, params) => const HomePageWidget(),
+          name: 'Get_started_page',
+          path: '/getStartedPage',
+          builder: (context, params) => const GetStartedPageWidget(),
         ),
         FFRoute(
-          name: 'Enter_Mobile',
-          path: '/enterMobile',
-          builder: (context, params) => const EnterMobileWidget(),
+          name: 'Enter_mobile_page',
+          path: '/enterMobilePage',
+          builder: (context, params) => const EnterMobilePageWidget(),
+        ),
+        FFRoute(
+          name: 'Verification_page',
+          path: '/verificationPage',
+          builder: (context, params) => const VerificationPageWidget(),
+        ),
+        FFRoute(
+          name: 'Name_page',
+          path: '/namePage',
+          builder: (context, params) => const NamePageWidget(),
+        ),
+        FFRoute(
+          name: 'Email_page',
+          path: '/emailPage',
+          builder: (context, params) => const EmailPageWidget(),
+        ),
+        FFRoute(
+          name: 'Birtday_page',
+          path: '/birtdayPage',
+          builder: (context, params) => const BirtdayPageWidget(),
+        ),
+        FFRoute(
+          name: 'Age_confirmation_page',
+          path: '/ageConfirmationPage',
+          builder: (context, params) => const AgeConfirmationPageWidget(),
+        ),
+        FFRoute(
+          name: 'Gender_confirmation_page',
+          path: '/genderConfirmationPage',
+          builder: (context, params) => const GenderConfirmationPageWidget(),
+        ),
+        FFRoute(
+          name: 'Gender_confirmation_pageCopy',
+          path: '/genderConfirmationPageCopy',
+          builder: (context, params) => const GenderConfirmationPageCopyWidget(),
+        ),
+        FFRoute(
+          name: 'Add_picture_page',
+          path: '/addPicturePage',
+          builder: (context, params) => const AddPicturePageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
