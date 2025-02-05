@@ -1,3 +1,5 @@
+import 'package:wolf_pack/index.dart';
+
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -57,11 +59,11 @@ class _GetStartedPageWidgetState extends State<GetStartedPageWidget> {
                       child: Text(
                         'dinner',
                         style:
-                            FlutterFlowTheme.of(context).displayMedium.override(
-                                  fontFamily: 'Inter Tight',
-                                  color: const Color(0xFFD4AF37),
-                                  letterSpacing: 0.0,
-                                ),
+                        FlutterFlowTheme.of(context).displayMedium.override(
+                          fontFamily: 'Inter Tight',
+                          color: const Color(0xFFD4AF37),
+                          letterSpacing: 0.0,
+                        ),
                       ),
                     ),
                   ],
@@ -75,11 +77,11 @@ class _GetStartedPageWidgetState extends State<GetStartedPageWidget> {
                   Text(
                     'tonight',
                     style: FlutterFlowTheme.of(context).displayMedium.override(
-                          fontFamily: 'Inter Tight',
-                          color: const Color(0xFFD4AF37),
-                          letterSpacing: 0.0,
-                          fontWeight: FontWeight.w100,
-                        ),
+                      fontFamily: 'Inter Tight',
+                      color: const Color(0xFFD4AF37),
+                      letterSpacing: 0.0,
+                      fontWeight: FontWeight.w100,
+                    ),
                   ),
                 ],
               ),
@@ -90,23 +92,27 @@ class _GetStartedPageWidgetState extends State<GetStartedPageWidget> {
                   child: FFButtonWidget(
                     onPressed: () {
                       print('Button pressed ...');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => EnterMobilePageWidget()),
+                      );
                     },
                     text: 'Get Started',
                     options: FFButtonOptions(
                       width: MediaQuery.sizeOf(context).width * 0.7,
                       height: 40.0,
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: Colors.black,
                       textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Inter Tight',
-                                color: const Color(0xFFD4AF37),
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.w300,
-                              ),
+                      FlutterFlowTheme.of(context).titleSmall.override(
+                        fontFamily: 'Inter Tight',
+                        color: const Color(0xFFD4AF37),
+                        letterSpacing: 0.0,
+                        fontWeight: FontWeight.w300,
+                      ),
                       elevation: 1.0,
                     ),
                   ),
@@ -119,7 +125,7 @@ class _GetStartedPageWidgetState extends State<GetStartedPageWidget> {
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(25.0, 0.0, 0.0, 0.0),
+                      const EdgeInsetsDirectional.fromSTEB(25.0, 0.0, 0.0, 0.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,9 +135,9 @@ class _GetStartedPageWidgetState extends State<GetStartedPageWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Inter',
-                                  letterSpacing: 0.0,
-                                ),
+                              fontFamily: 'Inter',
+                              letterSpacing: 0.0,
+                            ),
                           ),
                           InkWell(
                             splashColor: Colors.transparent,
@@ -146,10 +152,10 @@ class _GetStartedPageWidgetState extends State<GetStartedPageWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'Inter',
-                                    color: const Color(0xFFD4AF37),
-                                    letterSpacing: 0.0,
-                                  ),
+                                fontFamily: 'Inter',
+                                color: const Color(0xFFD4AF37),
+                                letterSpacing: 0.0,
+                              ),
                             ),
                           ),
                         ],

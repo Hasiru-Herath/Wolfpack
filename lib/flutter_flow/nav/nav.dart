@@ -52,7 +52,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Verification_page',
           path: '/verificationPage',
-          builder: (context, params) => const VerificationPageWidget(),
+          builder: (context, params) => const VerificationPageWidget(mobileNumber: '', verificationId: '',),
         ),
         FFRoute(
           name: 'Name_page',
@@ -72,22 +72,22 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Age_confirmation_page',
           path: '/ageConfirmationPage',
-          builder: (context, params) => const AgeConfirmationPageWidget(),
+          builder: (context, params) => const AgeConfirmationPageWidget(id: '',),
         ),
         FFRoute(
           name: 'Gender_confirmation_page',
           path: '/genderConfirmationPage',
-          builder: (context, params) => const GenderConfirmationPageWidget(),
+          builder: (context, params) => const GenderConfirmationPageWidget(id: '',),
         ),
         FFRoute(
           name: 'Gender_confirmation_pageCopy',
           path: '/genderConfirmationPageCopy',
-          builder: (context, params) => const GenderConfirmationPageCopyWidget(),
+          builder: (context, params) => const GenderConfirmationPageCopyWidget(id: '',),
         ),
         FFRoute(
           name: 'Add_picture_page',
           path: '/addPicturePage',
-          builder: (context, params) => const AddPicturePageWidget(),
+          builder: (context, params) => const AddPicturePageWidget(id: '',),
         ),
         FFRoute(
           name: 'Home_page',
