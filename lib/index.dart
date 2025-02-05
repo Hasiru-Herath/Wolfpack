@@ -16,3 +16,4 @@ export '/pages/gender_confirmation_page_copy/gender_confirmation_page_copy_widge
     show GenderConfirmationPageCopyWidget;
 export '/pages/add_picture_page/add_picture_page_widget.dart'
     show AddPicturePageWidget;
+export '/pages/home_page/home_page_widget.dart' show HomePageWidget;

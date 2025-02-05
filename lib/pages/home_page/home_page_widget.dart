@@ -1,30 +1,26 @@
-import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
-import 'gender_confirmation_page_model.dart';
-export 'gender_confirmation_page_model.dart';
+import 'home_page_model.dart';
+export 'home_page_model.dart';
 
-class GenderConfirmationPageWidget extends StatefulWidget {
-  const GenderConfirmationPageWidget({super.key});
+class HomePageWidget extends StatefulWidget {
+  const HomePageWidget({super.key});
 
   @override
-  State<GenderConfirmationPageWidget> createState() =>
-      _GenderConfirmationPageWidgetState();
+  State<HomePageWidget> createState() => _HomePageWidgetState();
 }
 
-class _GenderConfirmationPageWidgetState
-    extends State<GenderConfirmationPageWidget> {
-  late GenderConfirmationPageModel _model;
+class _HomePageWidgetState extends State<HomePageWidget> {
+  late HomePageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => GenderConfirmationPageModel());
+    _model = createModel(context, () => HomePageModel());
   }
 
   @override
@@ -44,16 +40,6 @@ class _GenderConfirmationPageWidgetState
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(15.0),
-          child: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            automaticallyImplyLeading: false,
-            actions: const [],
-            centerTitle: true,
-            elevation: 0.0,
-          ),
-        ),
         body: SafeArea(
           top: true,
           child: SingleChildScrollView(
@@ -74,15 +60,34 @@ class _GenderConfirmationPageWidgetState
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Align(
+                              alignment: const AlignmentDirectional(1.0, 0.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    'Genuine',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ),
                             Text(
-                              'How Do You Identify?',
+                              'Good Morning, ',
                               style: FlutterFlowTheme.of(context)
                                   .bodyLarge
                                   .override(
                                     fontFamily: 'Raleway',
                                     fontSize: 24.0,
                                     letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w600,
+                                    fontWeight: FontWeight.w500,
                                   ),
                             ),
                             Align(
@@ -91,57 +96,38 @@ class _GenderConfirmationPageWidgetState
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 10.0, 0.0, 0.0),
                                 child: Text(
-                                  'This helps us understand you better  and find your best match.',
+                                  'Shebin',
                                   textAlign: TextAlign.start,
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Raleway',
-                                        fontSize: 16.0,
+                                        color: const Color(0xFFD4AF37),
+                                        fontSize: 24.0,
                                         letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w600,
+                                        fontWeight: FontWeight.w500,
                                       ),
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 10.0, 0.0, 5.0),
-                              child: FlutterFlowDropDown<String>(
-                                controller: _model.dropDownValueController ??=
-                                    FormFieldController<String>(null),
-                                options: const ['Male', 'Female', 'Non-Binary'],
-                                onChanged: (val) => safeSetState(
-                                    () => _model.dropDownValue = val),
-                                width: MediaQuery.sizeOf(context).width * 0.9,
-                                height: 40.0,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Raleway',
-                                      fontSize: 16.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                hintText: 'Select...',
-                                icon: Icon(
-                                  Icons.keyboard_arrow_down_rounded,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 24.0,
+                            Align(
+                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 10.0, 0.0, 0.0),
+                                child: Text(
+                                  'Your date is ready.',
+                                  textAlign: TextAlign.start,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Raleway',
+                                        color: Colors.black,
+                                        fontSize: 24.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.w500,
+                                      ),
                                 ),
-                                fillColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                elevation: 2.0,
-                                borderColor: Colors.black,
-                                borderWidth: 1.0,
-                                borderRadius: 8.0,
-                                margin: const EdgeInsetsDirectional.fromSTEB(
-                                    12.0, 0.0, 12.0, 0.0),
-                                hidesUnderline: true,
-                                isOverButton: false,
-                                isSearchable: false,
-                                isMultiSelect: false,
                               ),
                             ),
                             Align(
@@ -153,7 +139,7 @@ class _GenderConfirmationPageWidgetState
                                   onPressed: () {
                                     print('Button pressed ...');
                                   },
-                                  text: 'Next',
+                                  text: 'Click to reveal',
                                   options: FFButtonOptions(
                                     width:
                                         MediaQuery.sizeOf(context).width * 0.9,

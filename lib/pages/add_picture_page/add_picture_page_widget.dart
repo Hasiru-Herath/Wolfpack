@@ -1,6 +1,3 @@
-import 'dart:io';
-import 'package:image_picker/image_picker.dart';
-
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -10,8 +7,7 @@ import 'add_picture_page_model.dart';
 export 'add_picture_page_model.dart';
 
 class AddPicturePageWidget extends StatefulWidget {
-  final String id;
-  const AddPicturePageWidget({super.key, required this.id});
+  const AddPicturePageWidget({super.key});
 
   @override
   State<AddPicturePageWidget> createState() => _AddPicturePageWidgetState();
@@ -19,19 +15,8 @@ class AddPicturePageWidget extends StatefulWidget {
 
 class _AddPicturePageWidgetState extends State<AddPicturePageWidget> {
   late AddPicturePageModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  File? _selectedImage;
-
-  Future<void> _pickImage() async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-
-    if (image != null) {
-      setState(() {
-        _selectedImage = File(image.path);
-      });
-    }
-  }
 
   @override
   void initState() {
@@ -46,7 +31,6 @@ class _AddPicturePageWidgetState extends State<AddPicturePageWidget> {
     super.dispose();
   }
 
-  @override
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -67,117 +51,190 @@ class _AddPicturePageWidgetState extends State<AddPicturePageWidget> {
             elevation: 0.0,
           ),
         ),
-        body: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+        body: SafeArea(
+          top: true,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Flexible(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        'Let’s See That Gorgeous\n Face!',
-                        style: FlutterFlowTheme.of(context)
-                            .bodyLarge
-                            .override(
-                          fontFamily: 'Raleway',
-                          fontSize: 24.0,
-                          letterSpacing: 0.0,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      _buildInfoRow(Icons.camera_alt,
-                          'Upload a clear, solo photo \nwhere your face is fully visible.'),
-                      _buildInfoRow(Icons.block,
-                          'No group selfies – this isn’t a squad\npic contest.'),
-                      _buildInfoRow(Icons.search,
-                          'No long shots – we want to see you \nup close, not in the next zip code.'),
-                      _buildInfoRow(Icons.adb,
-                          'No object photos – yes, your bike \nand kitten are cute, but we’re here for you.'),
-
-                      const SizedBox(height: 20),
-                      Center(
-                        child: GestureDetector(
-                          onTap: _pickImage,
-                          child: Container(
-                            width: 150,
-                            height: 150,
-                            decoration: BoxDecoration(
-                              color: Colors.grey[300],
-                              borderRadius: BorderRadius.circular(15),
+                      SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Let’s See That Gorgeous\n Face!',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyLarge
+                                  .override(
+                                    fontFamily: 'Raleway',
+                                    fontSize: 24.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                             ),
-                            child: _selectedImage != null
-                                ? ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: Image.file(
-                                _selectedImage!,
-                                fit: BoxFit.cover,
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Align(
+                                  alignment: const AlignmentDirectional(0.0, 0.0),
+                                  child: Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 20.0, 0.0, 10.0),
+                                    child: AutoSizeText(
+                                      'Upload a clear, solo photo \nwhere your face is fully visible.  ',
+                                      textAlign: TextAlign.start,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Raleway',
+                                            fontSize: 16.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: const AlignmentDirectional(0.0, 0.0),
+                                  child: Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 20.0, 0.0, 10.0),
+                                    child: AutoSizeText(
+                                      'No group selfies – this isn’t  a squad\n pic contest. ',
+                                      textAlign: TextAlign.start,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Raleway',
+                                            fontSize: 16.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: const AlignmentDirectional(0.0, 0.0),
+                                  child: Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 20.0, 0.0, 10.0),
+                                    child: AutoSizeText(
+                                      ' No long shots – we want to see you \nup close, not in the next zip code.  ',
+                                      textAlign: TextAlign.start,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Raleway',
+                                            fontSize: 16.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: const AlignmentDirectional(0.0, 0.0),
+                                  child: Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 20.0, 0.0, 10.0),
+                                    child: AutoSizeText(
+                                      'No object photos – yes, your bike \nand kitten are cute, but we’re here for you. ',
+                                      textAlign: TextAlign.start,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Raleway',
+                                            fontSize: 16.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Align(
+                              alignment: const AlignmentDirectional(0.0, 1.0),
+                              child: FFButtonWidget(
+                                onPressed: () {
+                                  print('Button pressed ...');
+                                },
+                                text: 'Let’s move on!',
+                                options: FFButtonOptions(
+                                  width: MediaQuery.sizeOf(context).width * 0.9,
+                                  height: 40.0,
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: Colors.black,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        fontFamily: 'Inter Tight',
+                                        color: const Color(0xFFD4AF37),
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                  elevation: 1.0,
+                                ),
                               ),
-                            )
-                                : const Icon(Icons.camera_alt, size: 50, color: Colors.black),
-                          ),
+                            ),
+                            Align(
+                              alignment: const AlignmentDirectional(0.0, 1.0),
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 400.0, 0.0, 0.0),
+                                child: FFButtonWidget(
+                                  onPressed: () {
+                                    print('Button pressed ...');
+                                  },
+                                  text: 'Let’s move on!',
+                                  options: FFButtonOptions(
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 0.9,
+                                    height: 40.0,
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: Colors.black,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'Inter Tight',
+                                          color: const Color(0xFFD4AF37),
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w300,
+                                        ),
+                                    elevation: 1.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      const SizedBox(height: 20),
                     ],
                   ),
                 ),
-              ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: FFButtonWidget(
-                onPressed: () {
-                  print('Button pressed ...');
-                },
-                text: 'Let’s move on!',
-                options: FFButtonOptions(
-                  width: double.infinity,
-                  height: 50.0,
-                  color: Colors.black,
-                  textStyle: FlutterFlowTheme.of(context)
-                      .titleSmall
-                      .override(
-                    fontFamily: 'Inter Tight',
-                    color: const Color(0xFFD4AF37),
-                    letterSpacing: 0.0,
-                    fontWeight: FontWeight.w300,
-                  ),
-                  elevation: 1.0,
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
   }
-
-  Widget _buildInfoRow(IconData icon, String text) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: Row(
-        children: [
-          Icon(icon, color: Colors.black, size: 24.0),
-          const SizedBox(width: 8.0),
-          Expanded(
-            child: AutoSizeText(
-              text,
-              textAlign: TextAlign.start,
-              style: FlutterFlowTheme.of(context)
-                  .bodyMedium
-                  .override(
-                fontFamily: 'Raleway',
-                fontSize: 16.0,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
 }

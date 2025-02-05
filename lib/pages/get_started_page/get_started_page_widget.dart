@@ -1,5 +1,3 @@
-import 'package:wolf_pack/index.dart';
-
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -92,10 +90,6 @@ class _GetStartedPageWidgetState extends State<GetStartedPageWidget> {
                   child: FFButtonWidget(
                     onPressed: () {
                       print('Button pressed ...');
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => EnterMobilePageWidget()),
-                      );
                     },
                     text: 'Get Started',
                     options: FFButtonOptions(

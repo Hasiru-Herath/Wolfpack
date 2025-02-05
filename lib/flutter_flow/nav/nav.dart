@@ -52,7 +52,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Verification_page',
           path: '/verificationPage',
-          builder: (context, params) => const VerificationPageWidget(mobileNumber: '', verificationId: '',),
+          builder: (context, params) => const VerificationPageWidget(),
         ),
         FFRoute(
           name: 'Name_page',
@@ -62,32 +62,37 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Email_page',
           path: '/emailPage',
-          builder: (context, params) => const EmailPageWidget(id: '',),
+          builder: (context, params) => const EmailPageWidget(),
         ),
         FFRoute(
           name: 'Birtday_page',
           path: '/birtdayPage',
-          builder: (context, params) => const BirtdayPageWidget(id: "",),
+          builder: (context, params) => const BirtdayPageWidget(),
         ),
         FFRoute(
           name: 'Age_confirmation_page',
           path: '/ageConfirmationPage',
-          builder: (context, params) => const AgeConfirmationPageWidget(id: '',),
+          builder: (context, params) => const AgeConfirmationPageWidget(),
         ),
         FFRoute(
           name: 'Gender_confirmation_page',
           path: '/genderConfirmationPage',
-          builder: (context, params) => const GenderConfirmationPageWidget(id: '',),
+          builder: (context, params) => const GenderConfirmationPageWidget(),
         ),
         FFRoute(
           name: 'Gender_confirmation_pageCopy',
           path: '/genderConfirmationPageCopy',
-          builder: (context, params) => const GenderConfirmationPageCopyWidget(id: '',),
+          builder: (context, params) => const GenderConfirmationPageCopyWidget(),
         ),
         FFRoute(
           name: 'Add_picture_page',
           path: '/addPicturePage',
-          builder: (context, params) => const AddPicturePageWidget(id: '',),
+          builder: (context, params) => const AddPicturePageWidget(),
+        ),
+        FFRoute(
+          name: 'Home_page',
+          path: '/homePage',
+          builder: (context, params) => const HomePageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
